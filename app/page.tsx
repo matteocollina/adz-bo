@@ -1,3 +1,13 @@
-export default function Page() {
-  return <h1 className="text-3xl font-bold">Work in progress</h1>
+import {Button, NextUIProvider} from "@nextui-org/react";
+
+export default function App({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <NextUIProvider>
+        {children}
+    </NextUIProvider>
+  )
 }
