@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.sub-menu {
+    overflow: hidden;
+    transition: height 300ms;
+  }

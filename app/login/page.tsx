@@ -4,9 +4,11 @@ import { useState } from 'react'
 import { Formik } from 'formik';
 import axios from 'axios';
 import { useToast } from '../components/Toast';
+import { useRouter } from 'next/router';
 
 export default function Login() {
 	const toast = useToast();
+  const router = useRouter()
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -46,6 +48,7 @@ export default function Login() {
                 setSubmitting(true)
                 await axios.post(`/api/auth/login`,values)
                 toast.showSuccess("Welcome back!");
+                router.push("/dashboard")
               } catch (error) {
                 toast.showError("Invalid credentials");
               }finally {

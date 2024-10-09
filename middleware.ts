@@ -4,7 +4,7 @@ export function middleware(request: NextRequest) {
   const currentUser = request.cookies.get('currentUser')?.value
  
   if (currentUser && !request.nextUrl.pathname.startsWith('/dashboard')) {
-    return Response.redirect(new URL('/dashboard', request.url))
+    return Response.redirect(new URL('/dashboard/home', request.url))
   }
  
   if (!currentUser && !request.nextUrl.pathname.startsWith('/login')) {
