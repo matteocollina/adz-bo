@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { AntdRegistry } from '@ant-design/nextjs-registry';
 
 // These styles apply to every route in the application
 import './globals.css'
@@ -18,8 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ToastProvider>
-
-          {children}
+        <AntdRegistry>{children}</AntdRegistry>
         </ToastProvider>
 
       </body>

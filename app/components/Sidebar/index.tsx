@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { SlHome } from 'react-icons/sl'
 import { BsInfoSquare, BsEnvelopeAt } from 'react-icons/bs'
-import { FaTshirt, FaRedhat } from 'react-icons/fa'
+import { FaTshirt, FaRedhat, FaBox } from 'react-icons/fa'
 
 
 export default function Sidebar({ show, setter }) {
@@ -64,9 +64,9 @@ export default function Sidebar({ show, setter }) {
                         icon={<SlHome />}
                     />
                     <MenuItem
-                        name="T-Shirts"
-                        route="/dashboard/t-shirts"
-                        icon={<FaTshirt />}
+                        name="Bundles"
+                        route="/dashboard/bundles"
+                        icon={<FaBox />}
                     />
                     {/* <MenuItem
                         name="Hats"

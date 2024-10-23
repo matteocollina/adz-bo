@@ -5,7 +5,7 @@ import Layout from "../../components/Layout";
 const Home = () => {
     return(
         <Layout pageTitle={"Home"}>
-            <p>{"Home"}</p>
+            <p>{"Work in progress"}</p>
         </Layout>
     )
 }

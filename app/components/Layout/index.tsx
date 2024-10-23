@@ -21,7 +21,7 @@ export default function Layout({ pageTitle, children }) {
                 <div className="flex">
                     <MenuBarMobile setter={setShowSidebar} />
                     <Sidebar show={showSidebar} setter={setShowSidebar} />
-                    <div className="flex flex-col flex-grow w-screen md:w-full min-h-screen">
+                    <div className="flex flex-col flex-grow w-screen md:w-full min-h-screen p-6">
                         {children}
                     </div>
                 </div>

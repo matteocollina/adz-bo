@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Formik } from 'formik';
 import axios from 'axios';
 import { useToast } from '../components/Toast';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router'
 
 export default function Login() {
 	const toast = useToast();
