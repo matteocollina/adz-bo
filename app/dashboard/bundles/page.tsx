@@ -7,6 +7,7 @@ import { Input, InputNumber, DatePicker, Select, Radio, Button, Upload, Row, Col
 import { UploadOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import supabase from "../../../utils/supabase";
+import { useToast } from "../../components/Toast";
 
 const { TextArea } = Input;
 const { RangePicker } = DatePicker;
@@ -32,19 +33,13 @@ const BundleSchema = Yup.object().shape({
 });
 
 function Bundles() {
-    const [coverImage, setCoverImage] = useState(null);
+    const toast = useToast();
 
-    const handleImageUpload = (info, setFieldValue) => {
-        if (info.file.status === 'done') {
-            setCoverImage(URL.createObjectURL(info.file.originFileObj));
-            setFieldValue('immagineCopertina', info.file.originFileObj);
-        }
-    };
     return (
         <Layout pageTitle={"Bundles"}>
             <Formik
                 initialValues={{
-                    immagineCopertina: '',
+                    immagine_copertina: '',
                     titolo: '',
                     descrizione: '',
                     piattaforma: '',
@@ -57,19 +52,18 @@ function Bundles() {
                     lineeGuida: '',
                 }}
                 validationSchema={BundleSchema}
-                onSubmit={async(formData) => {
+                onSubmit={async(formData, {resetForm}) => {
                     console.log(formData);
-                    alert(JSON.stringify(formData, null, 2));
+
                     try {
-                        // 1. Inserisci il record nella tabella bundles
-                        const { data: bundle, error: bundleError } : any = await supabase
+                        const { data: bundles, error: bundleError } : any = await supabase
                           .from('bundles')
                           .insert([
                             {
                               titolo: formData.titolo,
                               descrizione: formData.descrizione,
                               piattaforma: formData.piattaforma,
-                            //   immagine_copertina: formData.immagineCopertina, // URL o path dell'immagine
+                              immagine_copertina: formData.immagine_copertina, 
                               richiesta: formData.richiesta,
                               data_pubblicazione: formData.dataPubblicazione,
                               data_inizio: formData.dataInizio,
@@ -78,15 +72,14 @@ function Bundles() {
                               linee_guida: formData.lineeGuida,
                             },
                           ])
-                          .single();
+                          .select();
                         
-                        console.log({bundle, bundleError})
-                        
+                        const bundle = bundles[0];
+
                         if (bundleError) {
                           throw new Error(bundleError.message);
                         }
                     
-                        // 2. Inserisci i range di sconto/follower associati al bundle nella tabella discount_ranges
                         const discountRanges = formData.scontiFollowers.map((range) => ({
                           bundle_id: bundle.id, // Collega il bundle
                           quantita_sconto: range.quantitaSconto,
@@ -99,8 +92,11 @@ function Bundles() {
                           throw new Error(rangeError.message);
                         }
                     
+                        toast.showSuccess("Bundle creato con successo");
+                        resetForm();
                         return { success: true, bundleId: bundle.id };
                       } catch (error) {
+                        toast.showError(`Errore durante la creazione del bundle: ${error.message}`);
                         console.error('Errore durante la creazione del bundle:', error.message);
                         return { success: false, error: error.message };
                       }
@@ -111,19 +107,7 @@ function Bundles() {
                     return (
                         <Form>
                         <Row gutter={[16, 16]}>
-                            <Col span={24}>
-                                <label>Immagine di copertina:</label>
-                                <Upload
-                                    name="coverImage"
-                                    accept="image/*"
-                                    listType="picture"
-                                    showUploadList={false}
-                                    onChange={(info) => handleImageUpload(info, setFieldValue)}
-                                >
-                                    <Button icon={<UploadOutlined />}>Carica immagine</Button>
-                                </Upload>
-                                {coverImage && <img src={coverImage} alt="Copertina" style={{ width: '200px', marginTop: '10px' }} />}
-                            </Col>
+                            
 
                             <Col span={24}>
                                 <label>Titolo:</label>
@@ -131,6 +115,24 @@ function Bundles() {
                                     {({ field }) => <Input {...field} placeholder="Titolo" />}
                                 </Field>
                                 <ErrorMessage name="titolo" component="div" className="error-message" />
+                            </Col>
+
+                            <Col span={24}>
+                                <label>URL Immagine:</label>
+                                <Field name="immagine_copertina">
+                                    {({ field }) => <Input {...field} placeholder="Immagine copertina" />}
+                                </Field>
+                                <ErrorMessage name="immagine_copertina" component="div" className="error-message" />
+                                {/* <Upload
+                                    name="coverImage"
+                                    accept="image/*"
+                                    listType="picture"
+                                    showUploadList={false}
+                                    onChange={(info) => handleImageUpload(info, setFieldValue)}
+                                >
+                                    <Button icon={<UploadOutlined />}>Carica immagine</Button>
+                                </Upload> */}
+                                {/* {coverImage && <img src={coverImage} alt="Copertina" style={{ width: '200px', marginTop: '10px' }} />} */}
                             </Col>
 
                             <Col span={24}>
