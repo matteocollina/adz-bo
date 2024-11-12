@@ -34,7 +34,7 @@ const BundleSchema = Yup.object().shape({
     lineeGuida: Yup.string(),
 });
 
-function Bundles() {
+export default function Bundles() {
     const toast = useToast();
 
     return (
@@ -297,4 +297,3 @@ function Bundles() {
         </Layout>
     )
 }
-export default Bundles;

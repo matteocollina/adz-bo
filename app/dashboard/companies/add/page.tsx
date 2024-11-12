@@ -13,7 +13,7 @@ const CompanySchema = Yup.object().shape({
     piva: Yup.string().optional()
 });
 
-function Companys() {
+export default function Companys() {
     const toast = useToast();
 
     return (
@@ -89,4 +89,3 @@ function Companys() {
         </Layout>
     )
 }
-export default Companys;

@@ -10,7 +10,7 @@ import moment from 'moment';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { useToast } from '../../components/Toast';
 
-const BundlesTable = () => {
+export default function BundlesTable(){
     const [bundles, setBundles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -137,5 +137,3 @@ const BundlesTable = () => {
         </Layout>
     );
 };
-
-export default BundlesTable;

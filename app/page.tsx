@@ -1,11 +1,6 @@
-export default function App({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function App() {
   return (
-    <>
-        {children}
-    </>
+    <div>
+    </div>
   )
 }

@@ -2,11 +2,10 @@
 
 import Layout from "../../components/Layout";
 
-const Home = () => {
+export default function Home() {
     return(
         <Layout pageTitle={"Home"}>
             <p>{"Work in progress"}</p>
         </Layout>
     )
 }
-export default Home;

@@ -10,7 +10,7 @@ import moment from 'moment';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { useToast } from '../../components/Toast';
 
-const CompaniesTable = () => {
+export default function CompaniesTable() {
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -119,5 +119,3 @@ const CompaniesTable = () => {
         </Layout>
     );
 };
-
-export default CompaniesTable;

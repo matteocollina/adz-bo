@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ToastProvider>
-        <AntdRegistry>{children}</AntdRegistry>
+          <AntdRegistry>{children}</AntdRegistry>
         </ToastProvider>
 
       </body>
