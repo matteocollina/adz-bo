@@ -130,7 +130,7 @@ const BundlesTable = () => {
                 dataSource={bundles}
                 columns={columns}
                 rowKey="id" // Assicurati che ogni riga abbia un ID unico
-                pagination={{ pageSize: 10 }}
+                pagination={{ pageSize: 100 }}
                 bordered
                 title={() => 'Elenco dei Bundles'}
             />
