@@ -6,6 +6,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { SlHome } from 'react-icons/sl'
 import { BsInfoSquare, BsEnvelopeAt } from 'react-icons/bs'
 import { FaTshirt, FaArchway, FaBox } from 'react-icons/fa'
+import { Button } from 'antd';
+import { CiLogout } from "react-icons/ci";
+import axios from 'axios';
 
 
 export default function Sidebar({ show, setter }) {
@@ -88,6 +91,14 @@ export default function Sidebar({ show, setter }) {
                         route="/contact"
                         icon={<BsEnvelopeAt />}
                     /> */}
+                </div>
+                <div className='mt-10'>
+                    <Button type="link" onClick={async()=>{
+                        await axios.post(`/api/auth/logout`,{})
+                        router.refresh();
+                    }} icon={<CiLogout />}>
+                        Logout
+                    </Button>
                 </div>
             </div>
             {show ? <ModalOverlay /> : <></>}

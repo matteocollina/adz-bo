@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Formik } from 'formik';
 import axios from 'axios';
 import { useToast } from '../components/Toast';
-import { useRouter } from 'next/compat/router'
+import { useRouter } from "next/navigation";
 
 export default function Login() {
 	const toast = useToast();
@@ -48,8 +48,9 @@ export default function Login() {
                 setSubmitting(true)
                 await axios.post(`/api/auth/login`,values)
                 toast.showSuccess("Welcome back!");
-                router.push("/dashboard")
+                router.push("/dashboard/bundles")
               } catch (error) {
+                console.log({error})
                 toast.showError("Invalid credentials");
               }finally {
                 setSubmitting(false)
